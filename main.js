@@ -103,6 +103,7 @@ addBook.addEventListener('click', e => {
         trash.classList.add('fas')
         trash.classList.add('fa-trash-alt')
         const trashLink = document.createElement('a')
+        trashLink.setAttribute('id', 'trashLink')
         trashLink.appendChild(trash)
 
         // create div and add book class style
@@ -129,6 +130,7 @@ addBook.addEventListener('click', e => {
 
 
         displayBooks(myLibrary)
+        allowDeleting()
     } // error handling
     else {
         error.innerHTML = "You forgot to input something"
