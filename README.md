@@ -19,7 +19,7 @@
 
 <br>
 
-<h3>Color Scheme</h3>
-background color : rgb(41, 41, 41);
-book background color : rgb(241, 241, 241);
-add book background color : rgb(125, 255, 125);
+<h2>Color Scheme</h2>
+<p>background color : rgb(41, 41, 41); <br>
+book background color : rgb(241, 241, 241); <br>
+add book background color : rgb(125, 255, 125); <br></p>
