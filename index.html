@@ -18,62 +18,87 @@
 </head>
 <body class="bg-dark">
 
-    <!-- Title -->
-    <span class="d-flex flex-row align-items-center justify-content-between">
-        <h1 class="text-white text-left mt-3" style="margin-left: 5%; text-decoration: underline; text-decoration-color: rgb(125, 255, 125);">lib<span style="color: rgb(125, 255, 125)">-</span>check</h1>
-        <a  class="text-dark p-2 mt-3" style="margin-right: 5%; text-decoration-color: white; border-radius: 9px; background-color: rgb(125, 255, 125); font-size: 1.5rem; outline: none;" href="#signIn" id="signIn">Sign In</a>
-    </span>
-    
-
-    <!-- Book list containers -->
-    <div id="container" class="w-100 mt-5" style="display: grid; grid-template-columns: auto auto auto;">
-
-        <!-- this is how book div looks -->
-        <!--<div id="book">
-            <h3></h3>
-            <p></p>
-            <h5></h5>
-        </div>-->
-
-        <div id="add" style="height: 160px; width: 220px; background-color: rgb(125, 255, 125);" class="m-5 p-5 d-flex justify-content-center align-items-center">
-            <a style="font-size: 1.8rem; cursor: pointer;">Add Book</a>
+    <div id="hello-cont">
+        <h1>Hello, how would you like to store your library?</h1>
+        <div>
+            <a href="#cloud">Cloud</a>
+            <a href="#local">Local</a>
         </div>
-
     </div>
 
-    <!-- FORM CONTAINER-->
-    <div id="form-container" class="w-100 h-100 position-absolute top-0" style="background-color: rgba(0, 0, 0, 0.8); display: none; justify-content: center; align-items: center;"> 
-        <!-- The contents -->
-        <div id="modal-contents" class="bg-white position-relative d-flex flex-column justify-content-center align-items-center" style="height: 520px; width: 500px; border-radius: 4px;">
+    <div id="full-cont" style="display: none;">
+        <!-- Title -->
+        <span class="d-flex flex-row align-items-center justify-content-between">
+            <h1 class="text-white text-left mt-3" style="margin-left: 5%; text-decoration: underline; text-decoration-color: rgb(125, 255, 125);">lib<span style="color: rgb(125, 255, 125)">-</span>check</h1>
+            <a  class="text-dark p-2 mt-3" style="margin-right: 5%; text-decoration-color: white; border-radius: 9px; background-color: rgb(125, 255, 125); font-size: 1.5rem; outline: none;" href="#signIn" id="signIn">Sign In</a>
+        </span>
+        
+        <div id="top-cont" class="d-flex flex-row align-items-center justify-content-between">
+            <div class="d-flex flex-row align-items-center" style="width: 30%; margin: 5% 3% 5% 5%;">
+                <div id="add" style="height: 60px; width: 60px; background-color: rgb(125, 255, 125);" class="p-5 d-flex justify-content-center align-items-center">
+                    <a style="font-size: 1.8rem; cursor: pointer;">+</a>
+                </div>
+                <h2 class="text-light" style="margin-left: 4%;">Add a new Book</h2>
+            </div>
+            <div id="books-info" class="text-light d-flex flex-row" style="width: 45%;">
+                <h5 style="margin-right:6%;">Books added: <span id="booksAdded">0</span></h5>
+                <h5 style="margin-right:6%;">Books read: <span id="booksRead">0</span></h5>
+                <h5>Paged read: <span id="pagesRead">0</span></h5>
+            </div>
+        </div>
 
-            <!-- X to close window -->
-            <div id="close" class="position-absolute top-0 " style="right: 10px; font-size: 42px; color: #333;; transform: rotate(45deg); cursor: pointer;">+</div>
-    
-            <h1>Add a book</h1>
-            <form id="form">
+        <!-- Book list containers -->
+        <div id="container" class="w-100 mt-5" style="display: grid; grid-template-columns: auto auto; place-items: center;">
 
-                <input class="mx-auto d-block" style="margin-top: 1rem; width: 250px; padding: 8px; font-size: 0.9rem; border: 2px solid gray; border-radius: 5px;" type="text" placeholder="Title of Book" id="title" autocomplete="off"> <br>
-                <input class="mx-auto d-block" style="margin-top: 1rem; width: 250px; padding: 8px; font-size: 0.9rem; border: 2px solid gray; border-radius: 5px;" type="text" placeholder="Author" id="author" autocomplete="off"> <br>
-                <input class="mx-auto d-block" style="margin-top: 1rem; width: 250px; padding: 8px; font-size: 0.9rem; border: 2px solid gray; border-radius: 5px;" type="text" placeholder="Pages" id="pages" autocomplete="off"> <br>
+            <!-- this is how book div looks -->
+            <div class="book book-not-read">
+                <div id="info">
+                    <h2>"Harry Potter 7 Rings"</h2>
+                    <h3>~Jovan Miljkovic</h3>
+                    <p>Total pages: 543</p>
+                    <p>Pages read: 200</p>
+                </div>
+                <div id="btns">
+                    <a href="#deleteBook"><p><i class="fas fa-times"></i></p></a>
+                </div>
+            </div>
 
-                <p>Have you read this book?</p>
-                <span>
-                    <input type="radio" id="yes" name="read" value="Yes">
-                    <label for="yes">Yes</label>
-                </span>
-                <span>
-                    <input type="radio" id="no" name="read" value="No">
-                    <label for="no">No</label> <br>
-                </span>
+        </div>
 
-                
+        <!-- FORM CONTAINER-->
+        <div id="form-container" class="w-100 h-100 position-absolute top-0" style="background-color: rgba(0, 0, 0, 0.8); display: none; justify-content: center; align-items: center;"> 
+            <!-- The contents -->
+            <div id="modal-contents" class="bg-dark text-light position-relative d-flex flex-column justify-content-center align-items-center" style="height: 520px; width: 500px; border-radius: 4px;">
 
-                <a href="#" id="addBook">Submit</a>
-                
-                <!-- If error is made here it will be displayed -->
-                <span id="errorSpan" class="text-danger"></span>
-            </form>
+                <!-- X to close window -->
+                <div id="close" class="position-absolute top-0 " style="right: 10px; font-size: 42px; color: rgb(255, 9, 9); transform: rotate(45deg); cursor: pointer;">+</div>
+        
+                <h1>Add a book</h1>
+                <form id="form">
 
+                    <input class="mx-auto d-block" style="margin-top: 1rem; width: 250px; padding: 8px; font-size: 0.9rem; border: 2px solid gray; border-radius: 5px;" type="text" placeholder="Title of Book" id="title" autocomplete="off"> <br>
+                    <input class="mx-auto d-block" style="margin-top: 1rem; width: 250px; padding: 8px; font-size: 0.9rem; border: 2px solid gray; border-radius: 5px;" type="text" placeholder="Author" id="author" autocomplete="off"> <br>
+                    <input class="mx-auto d-block" style="margin-top: 1rem; width: 250px; padding: 8px; font-size: 0.9rem; border: 2px solid gray; border-radius: 5px;" type="text" placeholder="Pages" id="pages" autocomplete="off"> <br>
+
+                    <p>Have you read this book?</p>
+                    <span>
+                        <input type="radio" id="yes" name="read" value="Yes">
+                        <label for="yes">Yes</label>
+                    </span>
+                    <span>
+                        <input type="radio" id="no" name="read" value="No">
+                        <label for="no">No</label> <br>
+                    </span>
+
+                    
+
+                    <a href="#" id="addBook">Submit</a>
+                    
+                    <!-- If error is made here it will be displayed -->
+                    <span id="errorSpan" class="text-danger"></span>
+                </form>
+
+            </div>
         </div>
     </div>
 

@@ -52,28 +52,36 @@ function displayBooks(myLibrary) {
     }
 } 
 
-// function to open the pop up form for new book
-let add = document.getElementById('add')
-add.addEventListener('click', e => {
-    document.getElementById('form-container').style.display = "flex";
-})
-let close = document.getElementById('close')
-close.addEventListener('click', e => {
-    document.getElementById('form-container').style.display = "none";
-})
+
 
 // function to add a new book in the myLibrary array
 let addBook = document.getElementById('addBook')
 let error = document.getElementById('errorSpan')
 
-addBook.addEventListener('click', e => {
-    // all form values
-    let newTitle = document.getElementById('title')
-    let newAuthor = document.getElementById('author')
-    let newPages = document.getElementById('pages')
-    let readYes = document.getElementById('yes')
-    let readNo = document.getElementById('no')
+// all form values
+let newTitle = document.getElementById('title')
+let newAuthor = document.getElementById('author')
+let newPages = document.getElementById('pages')
+let readYes = document.getElementById('yes')
+let readNo = document.getElementById('no')
 
+// function to open the pop up form for new book
+let add = document.getElementById('add')
+add.addEventListener('click', e => {
+    document.getElementById('form-container').style.display = "flex";
+})
+// function to close the pop up window and delete the text written
+let close = document.getElementById('close')
+close.addEventListener('click', e => {
+    newTitle.value = "";
+    newAuthor.value = "";
+    newPages.value = "";
+    readYes.checked = false
+    readNo.checked = false
+    document.getElementById('form-container').style.display = "none";
+})
+
+addBook.addEventListener('click', e => {
     // only if form is complete 
     if (newTitle.value && newAuthor.value && newPages.value && (readNo.checked || readYes.checked)) {
         error.innerHTML = ''
@@ -91,14 +99,6 @@ addBook.addEventListener('click', e => {
         const read = document.createElement('h5')
         read.innerHTML = (readAns) ? "Read!" : "Not read yet!"
 
-        const check = document.createElement('i')
-        check.classList.add('fas')
-        if (readAns) {
-            check.classList.add('fa-check')
-        } else {
-            check.classList.add('fa-times')
-        }
-
         const trash = document.createElement('i')
         trash.classList.add('fas')
         trash.classList.add('fa-trash-alt')
@@ -115,7 +115,6 @@ addBook.addEventListener('click', e => {
         item.appendChild(author)
         item.appendChild(pages)
         item.appendChild(read)
-        item.appendChild(check)
         item.appendChild(trashLink)
 
         // append the item in the container
