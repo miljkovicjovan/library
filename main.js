@@ -8,18 +8,25 @@ localLink.addEventListener('click', e => {
 })
 
 // object of book 
-function Book(title, author, pages, read) {
+function Book(title, author, pagesTotal, pagesRead) {
     this.title = title
     this.author = author
-    this.pages = pages
-    this.read = read
+    this.pagesTotal = pagesTotal
+    this.pagesRead = pagesRead
     this.info = function() {
         if (read) {
             read = "read"
         } else {
             read = "not read yet"
         }
-        return title + ", " + author + ", " + pages + " pages, " + read
+
+        if (pagesRead === pagesTotal) {
+            pages = "fully read"
+        } else {
+            pages = pagesRead + " pages read from " + pagesTotal + " total" 
+        }
+
+        return title + ", " + author + ", " + pages
     }
 }
 
@@ -61,8 +68,6 @@ function displayBooks(myLibrary) {
     }
 } 
 
-
-
 // function to add a new book in the myLibrary array
 let addBook = document.getElementById('addBook')
 let error = document.getElementById('errorSpan')
@@ -70,61 +75,83 @@ let error = document.getElementById('errorSpan')
 // all form values
 let newTitle = document.getElementById('title')
 let newAuthor = document.getElementById('author')
-let newPages = document.getElementById('pages')
-let readYes = document.getElementById('yes')
-let readNo = document.getElementById('no')
+let totalPages = document.getElementById('totalPages')
+let readPages = document.getElementById('readPages')
 
 // function to open the pop up form for new book
 let add = document.getElementById('add')
 add.addEventListener('click', e => {
+    window.scrollTo(0, 0);
+    document.documentElement.style.overflow = "hidden"
     document.getElementById('form-container').style.display = "flex";
 })
 // function to close the pop up window and delete the text written
 let close = document.getElementById('close')
 close.addEventListener('click', e => {
+    document.documentElement.style.overflow = "visible"
     newTitle.value = "";
     newAuthor.value = "";
-    newPages.value = "";
-    readYes.checked = false
-    readNo.checked = false
+    totalPages.value = ''
+    readPages.value = ''
+    error.innerHTML = ""
     document.getElementById('form-container').style.display = "none";
 })
 
 addBook.addEventListener('click', e => {
     // only if form is complete 
-    if (newTitle.value && newAuthor.value && newPages.value && (readNo.checked || readYes.checked)) {
+    if (newTitle.value && newAuthor.value && totalPages.value && readPages.value && totalPages.valueAsNumber >= readPages.valueAsNumber) {
         error.innerHTML = ''
-        let readAns = (readNo.checked) ? false : true
 
         const title = document.createElement('h2')
-        title.innerHTML = newTitle.value
+        title.innerHTML = '"' + newTitle.value + '"'
 
         const author = document.createElement('h3')
-        author.innerHTML = "Author: " + newAuthor.value
+        author.innerHTML = "~ " + newAuthor.value
 
-        const pages = document.createElement('p')
-        pages.innerHTML = "Pages: " + newPages.value
+        const pagesRead = document.createElement('p')
+        pagesRead.innerHTML = "Pages read: " + readPages.valueAsNumber
 
-        const read = document.createElement('h5')
-        read.innerHTML = (readAns) ? "Read!" : "Not read yet!"
+        const pagesTotal = document.createElement('p')
+        pagesTotal.innerHTML = "Total pages: " + totalPages.valueAsNumber
 
-        const trash = document.createElement('i')
-        trash.classList.add('fas')
-        trash.classList.add('fa-trash-alt')
-        const trashLink = document.createElement('a')
-        trashLink.setAttribute('id', 'trashLink')
-        trashLink.appendChild(trash)
+        // create div and add info class style
+        const info = document.createElement('div')
+        info.classList.add('info')
+
+        // add the values in the info div
+        info.appendChild(title)
+        info.appendChild(author)
+        info.appendChild(pagesRead)
+        info.appendChild(pagesTotal)
+
+        // create the x button
+        const iconX = document.createElement('i')
+        iconX.classList.add('fas')
+        iconX.classList.add('fa-times')
+
+        // create the p tag to have the i tag in 
+        const pTag = document.createElement('p')
+
+        // put the iconX in the pTag
+        pTag.appendChild(iconX)
+
+        // create the btns div to add the pTag
+        const btns = document.createElement('div')
+        btns.classList.add('btns')
+        btns.appendChild(pTag)
 
         // create div and add book class style
         const item = document.createElement('div')
         item.classList.add('book')
+        if (totalPages.valueAsNumber > readPages.valueAsNumber) {
+            item.classList.add('book-not-read')
+        } else {
+            item.classList.add('book-read')
+        }
 
-        // add the info of the books in the item
-        item.appendChild(title)
-        item.appendChild(author)
-        item.appendChild(pages)
-        item.appendChild(read)
-        item.appendChild(trashLink)
+        // add the info and btns cont
+        item.appendChild(info)
+        item.appendChild(btns)
 
         // append the item in the container
         container.insertBefore(item, container.firstChild)
@@ -132,13 +159,13 @@ addBook.addEventListener('click', e => {
         // remove values and close form
         newTitle.value = "";
         newAuthor.value = "";
-        newPages.value = "";
-        (readAns) ? readYes.checked = false : readNo.checked = false
+        totalPages.value = ''
+        readPages.value = ''
         document.getElementById('form-container').style.display = "none";
 
 
+        document.documentElement.style.overflow = "visible"
         displayBooks(myLibrary)
-        allowDeleting()
     } // error handling
     else {
         error.innerHTML = "You forgot to input something"

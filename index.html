@@ -22,8 +22,8 @@
     <div id="hello-cont" class="text-light" style="display: grid; place-items: center; height: 25%; margin-top: 15%;">
         <h1>Hello, how would you like to store your library?</h1>
         <div class="w-50 d-flex justify-content-around mt-5">
-            <a class="text-light" style="padding: 8%; border-radius: 26px; border: 1px solid white; font-size: 1.5rem; text-decoration: none; transition: all 0.3s;" href="#cloud" id="cloud">Cloud</a>
-            <a class="text-light" style="padding: 8%; border-radius: 26px; border: 1px solid white; font-size: 1.5rem; text-decoration: none; transition: all 0.3s;"  href="#local" id="local">Local</a>
+            <a class="text-light" style="padding: 8%; border-radius: 26px; border: 1px solid white; font-size: 1.5rem; text-decoration: none; transition: all 0.3s; outline: none;" href="#cloud" id="cloud">Cloud</a>
+            <a class="text-light" style="padding: 8%; border-radius: 26px; border: 1px solid white; font-size: 1.5rem; text-decoration: none; transition: all 0.3s; outline: none;"  href="#local" id="local">Local</a>
         </div>
     </div>
 
@@ -52,24 +52,27 @@
         <div id="container" class="w-100 mt-5" style="display: grid; grid-template-columns: auto auto; place-items: center;">
 
             <!-- this is how book div looks -->
+            <!--
             <div class="book book-not-read">
                 <div id="info">
                     <h2>"Harry Potter 7 Rings"</h2>
-                    <h3>~Jovan Miljkovic</h3>
-                    <p>Total pages: 543</p>
+                    <h3>~ Jovan Miljkovic</h3>
+                    <p>Total pages: 43</p>
                     <p>Pages read: 200</p>
                 </div>
-                <div id="btns">
-                    <a href="#deleteBook"><p><i class="fas fa-times"></i></p></a>
+                <div class="btns">
+                    <p><i class="fas fa-times"></i></p>
                 </div>
             </div>
+            -->
+             
 
         </div>
 
         <!-- FORM CONTAINER-->
         <div id="form-container" class="w-100 h-100 position-absolute top-0" style="background-color: rgba(0, 0, 0, 0.8); display: none; justify-content: center; align-items: center;"> 
             <!-- The contents -->
-            <div id="modal-contents" class="bg-dark text-light position-relative d-flex flex-column justify-content-center align-items-center" style="height: 520px; width: 500px; border-radius: 4px;">
+            <div id="modal-contents" class="bg-dark text-light position-relative d-flex flex-column justify-content-center align-items-center" style="height: 630px; width: 500px; border-radius: 4px;">
 
                 <!-- X to close window -->
                 <div id="close" class="position-absolute top-0 " style="right: 10px; font-size: 42px; color: rgb(255, 9, 9); transform: rotate(45deg); cursor: pointer;">+</div>
@@ -79,16 +82,9 @@
 
                     <input class="mx-auto d-block" style="margin-top: 1rem; width: 250px; padding: 8px; font-size: 0.9rem; border: 2px solid gray; border-radius: 5px;" type="text" placeholder="Title of Book" id="title" autocomplete="off"> <br>
                     <input class="mx-auto d-block" style="margin-top: 1rem; width: 250px; padding: 8px; font-size: 0.9rem; border: 2px solid gray; border-radius: 5px;" type="text" placeholder="Author" id="author" autocomplete="off"> <br>
-                    <input class="mx-auto d-block" style="margin-top: 1rem; width: 250px; padding: 8px; font-size: 0.9rem; border: 2px solid gray; border-radius: 5px;" type="text" placeholder="Pages" id="pages" autocomplete="off"> <br>
 
-                    <p>Have you read this book?</p>
-                    <span>
-                        <input type="radio" id="yes" name="read" value="Yes">
-                        <label for="yes">Yes</label>
-                    </span>
-                    <span>
-                        <input type="radio" id="no" name="read" value="No">
-                        <label for="no">No</label> <br>
+                    <input class="mx-auto d-block" style="margin-top: 1rem; width: 150px; padding: 8px; font-size: 0.9rem; border: 2px solid gray; border-radius: 5px;" type="number" placeholder="Pages Read" id="readPages" autocomplete="off"> <br>
+                    <input class="mx-auto d-block" style="margin-top: 1rem; width: 150px; padding: 8px; font-size: 0.9rem; border: 2px solid gray; border-radius: 5px;" type="number" placeholder="Total Pages" id="totalPages" autocomplete="off"> <br>
                     </span>
 
                     
