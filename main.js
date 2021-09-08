@@ -55,11 +55,11 @@ function displayBooks(myLibrary) {
 // function to open the pop up form for new book
 let add = document.getElementById('add')
 add.addEventListener('click', e => {
-    document.querySelector('.form-container').style.display = "flex";
+    document.getElementById('form-container').style.display = "flex";
 })
-let close = document.querySelector('.close')
+let close = document.getElementById('close')
 close.addEventListener('click', e => {
-    document.querySelector('.form-container').style.display = "none";
+    document.getElementById('form-container').style.display = "none";
 })
 
 // function to add a new book in the myLibrary array
@@ -109,7 +109,7 @@ addBook.addEventListener('click', e => {
         newAuthor.value = "";
         newPages.value = "";
         (readAns) ? readYes.checked = false : readNo.checked = false
-        document.querySelector('.form-container').style.display = "none";
+        document.getElementById('form-container').style.display = "none";
 
 
         displayBooks(myLibrary)

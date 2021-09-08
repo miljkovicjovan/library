@@ -1,110 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
-
-html, body {
-    height: 100%;
-    padding: 0;
-    margin: 0;
-    font-family: 'Lato', sans-serif;
-    background-color: rgb(41, 41, 41);
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-h1 {
-    color: #eee;
-    font-size: 2.4rem;
-    margin-bottom: 7%;
-}
-
-#container {
-    display: grid;
-    grid-template-columns: auto auto auto auto ;
-    width: 100%;
-    background-color: rgb(41, 41, 41);
-}
-
-.book {
-    background-color: rgb(241, 241, 241);
-    min-height: 100px;
-    min-width: 150px;
-    padding: 5%;
-    margin: 19%;
-}
-
-#add {
-    background-color: rgb(125, 255, 125);
-    min-height: 100px;
-    min-width: 150px;
-    padding: 5%;
-    margin: 19%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#add a {
-    color: rgb(53, 53, 53);
-    font-size: 1.5rem;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-#add a:hover {
-    color: black;
-}
-
-/* FORM */
-.form-container {
-    background-color: rgba(0, 0, 0, 0.8);
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	top: 0;
-	display: none;
-	justify-content: center;
-	align-items: center;
-}
-
-.close {
-    position: absolute;
-	top: 0;
-	right: 10px;
-	font-size: 42px;
-	color: #333;
-	transform: rotate(45deg);
-	cursor: pointer;
-}
-
-.modal-contents {
-    height: 520px;
-	width: 500px;
-	background-color: white;
-	position: relative;
-	border-radius: 4px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.modal-contents h1 {
-    color: black;
-    margin-block-start: 0;
-}
-
-input[type="text"] {
-    margin-top: 3rem;
-	margin: auto;
-	display: block;
-    width: 250px;
-	padding: 8px;
-    font-size: 0.9rem;
-	border: 2px solid gray;
-    border-radius: 5px;
-}
-
-.modal-contents form a {
+#addBook {
     position: absolute;
     top: 450px;
     font-size: 1.6rem;
@@ -112,10 +6,15 @@ input[type="text"] {
     opacity: 0.6;
     transition: all 0.3s;
 }
-.modal-contents form a:hover {
+
+#addBook:hover {
     opacity: 1;
 }
 
-#errorSpan {
-    color: red;
+.book {
+    background-color: rgb(255, 234, 176);
+    height: 340px;
+    width: 350px;
+    padding: 3rem;
+    margin: 3rem;
 }
