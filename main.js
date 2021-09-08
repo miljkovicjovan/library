@@ -78,18 +78,32 @@ addBook.addEventListener('click', e => {
     if (newTitle.value && newAuthor.value && newPages.value && (readNo.checked || readYes.checked)) {
         error.innerHTML = ''
         let readAns = (readNo.checked) ? false : true
-       
+
         const title = document.createElement('h2')
         title.innerHTML = newTitle.value
 
         const author = document.createElement('h3')
-        author.innerHTML = newAuthor.value
+        author.innerHTML = "Author: " + newAuthor.value
 
         const pages = document.createElement('p')
-        pages.innerHTML = newPages.value
+        pages.innerHTML = "Pages: " + newPages.value
 
         const read = document.createElement('h5')
-        read.innerHTML = readAns
+        read.innerHTML = (readAns) ? "Read!" : "Not read yet!"
+
+        const check = document.createElement('i')
+        check.classList.add('fas')
+        if (readAns) {
+            check.classList.add('fa-check')
+        } else {
+            check.classList.add('fa-times')
+        }
+
+        const trash = document.createElement('i')
+        trash.classList.add('fas')
+        trash.classList.add('fa-trash-alt')
+        const trashLink = document.createElement('a')
+        trashLink.appendChild(trash)
 
         // create div and add book class style
         const item = document.createElement('div')
@@ -100,6 +114,8 @@ addBook.addEventListener('click', e => {
         item.appendChild(author)
         item.appendChild(pages)
         item.appendChild(read)
+        item.appendChild(check)
+        item.appendChild(trashLink)
 
         // append the item in the container
         container.insertBefore(item, container.firstChild)

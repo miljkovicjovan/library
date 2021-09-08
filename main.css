@@ -1,3 +1,4 @@
+/* the add books button */
 #addBook {
     position: absolute;
     top: 450px;
@@ -6,15 +7,39 @@
     opacity: 0.6;
     transition: all 0.3s;
 }
-
 #addBook:hover {
     opacity: 1;
 }
 
+/* the books cont */
 .book {
     background-color: rgb(255, 234, 176);
+    position: relative;
+    text-align: center;
     height: 340px;
     width: 350px;
     padding: 3rem;
     margin: 3rem;
+}
+.book h2 {
+    font-weight: 300;
+}
+.book h3 {
+    padding-top: 2rem;
+    font-weight: 200;
+}
+.book p {
+    font-weight: 200;
+}
+.book a {
+    position: absolute;
+    top: 12px;
+    right: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+.book a:hover {
+    background-color: rgba(0, 0, 0, 0.2);
 }
