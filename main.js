@@ -1,3 +1,12 @@
+// When clicking local 
+let localLink = document.getElementById('local')
+localLink.addEventListener('click', e => {
+    // turn hello page display none
+    document.getElementById('hello-cont').style.display = 'none'
+    // turn local page display on
+    document.getElementById('full-cont').style.display = 'block'
+})
+
 // object of book 
 function Book(title, author, pages, read) {
     this.title = title

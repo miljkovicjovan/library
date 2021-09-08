@@ -1,3 +1,11 @@
+/* welcome page */
+#hello-cont a:hover{
+    border-radius: 26px;
+    background: linear-gradient(145deg, #252525, #131313);
+    box-shadow:  13px 13px 26px #414141,
+                -13px -13px 26px #808080;
+}
+
 /* the add books button */
 #addBook {
     position: absolute;
