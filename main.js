@@ -128,17 +128,28 @@ addBook.addEventListener('click', e => {
         const iconX = document.createElement('i')
         iconX.classList.add('fas')
         iconX.classList.add('fa-times')
+        iconX.classList.add('exit-x')
+
+        // create the edit button
+        const editPen = document.createElement('i')
+        editPen.classList.add('fas')
+        editPen.classList.add('fa-pen')
+        editPen.classList.add('edit-pen')
 
         // create the p tag to have the i tag in 
-        const pTag = document.createElement('p')
+        const pTagX = document.createElement('p')
+        const pTagPen = document.createElement('p')     
 
         // put the iconX in the pTag
-        pTag.appendChild(iconX)
+        pTagX.appendChild(iconX)
+        pTagPen.appendChild(editPen)
+        
 
         // create the btns div to add the pTag
         const btns = document.createElement('div')
         btns.classList.add('btns')
-        btns.appendChild(pTag)
+        btns.appendChild(pTagX)
+        btns.appendChild(pTagPen)
 
         // create div and add book class style
         const item = document.createElement('div')
