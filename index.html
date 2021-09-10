@@ -52,20 +52,18 @@
         <div id="container" class="w-100 mt-5" style="display: grid; grid-template-columns: auto auto; place-items: center;">
 
             <!-- this is how book div looks -->
-            <!--
             <div class="book book-not-read">
-                <div id="info">
+                <div class="info">
                     <h2>"Harry Potter 7 Rings"</h2>
                     <h3>~ Jovan Miljkovic</h3>
                     <p>Total pages: 43</p>
                     <p>Pages read: 200</p>
                 </div>
                 <div class="btns">
-                    <p><i class="fas fa-times"></i></p>
-                    <p><i class="fas fa-pen"></i></p>
+                    <p><i class="fas fa-times exit-x"></i></p>
+                    <p><i class="fas fa-pen edit-pen"></i></p>
                 </div>
             </div>
-            -->
              
 
         </div>
@@ -73,13 +71,13 @@
         <!-- FORM CONTAINER-->
         <div id="form-container" class="w-100 h-100 position-absolute top-0" style="background-color: rgba(0, 0, 0, 0.8); display: none; justify-content: center; align-items: center;"> 
             <!-- The contents -->
-            <div id="modal-contents" class="bg-dark text-light position-relative d-flex flex-column justify-content-center align-items-center" style="height: 630px; width: 500px; border-radius: 4px;">
+            <div class="bg-dark text-light position-relative d-flex flex-column justify-content-center align-items-center" style="height: 630px; width: 500px; border-radius: 4px;">
 
                 <!-- X to close window -->
                 <div id="close" class="position-absolute top-0 " style="right: 10px; font-size: 42px; color: rgb(255, 9, 9); transform: rotate(45deg); cursor: pointer;">+</div>
         
                 <h1>Add a book</h1>
-                <form id="form">
+                <form>
 
                     <input class="mx-auto d-block" style="margin-top: 1rem; width: 250px; padding: 8px; font-size: 0.9rem; border: 2px solid gray; border-radius: 5px;" type="text" placeholder="Title of Book" id="title" autocomplete="off"> <br>
                     <input class="mx-auto d-block" style="margin-top: 1rem; width: 250px; padding: 8px; font-size: 0.9rem; border: 2px solid gray; border-radius: 5px;" type="text" placeholder="Author" id="author" autocomplete="off"> <br>
@@ -103,7 +101,8 @@
             <p class="text-light">lib-check was created by <a href="https://github.com/miljkovicjovan">@miljkovicjovan</a></p>
         </div>
     </div>
-    <!-- Scripts -->
-    <script src="main.js"></script>
+    <!-- Scripts 
+    <script src="main.js"></script>-->
+    <script src="test.js"></script>
 </body>
 </html>
