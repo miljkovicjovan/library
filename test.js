@@ -22,8 +22,6 @@ let formError = document.getElementById('errorSpan')
 let booksAdded = document.getElementById('booksAdded')
 let booksRead = document.getElementById('booksRead')
 let pagesRead = document.getElementById('pagesRead')
-// books cont
-let library = document.getElementById('container')
 // book buttons
 let deleteBook = document.querySelector('.exit-x')
 let editBook = document.querySelector('.edit-pem')
@@ -87,3 +85,86 @@ formSubmit.addEventListener('click', e => {
         console.log("no")
     }
 })
+
+// Book class : represents each book added (title/author/pages read/total pages)
+class Book {
+    constructor(title, author, pagesRead, pagesTotal, isbn) {
+        this.title = title;
+        this.author = author;
+        this.pagesRead = pagesRead;
+        this.pagesTotal = pagesTotal;
+        this.isbn = isbn;
+    }
+}
+
+// UI Class : represents User Interface and all actions connected 
+class UI {
+    static displayBooks() {
+        // this is hard coded for testing purposes only
+        const storedBooks = [
+            {
+                title: "Book One",
+                author: "Author One",
+                pagesRead: 23,
+                pagesTotal: 200,
+                isbn: '45672'
+            },
+            {
+                title: "Book Two",
+                author: "Author Two",
+                pagesRead: 200,
+                pagesTotal: 200,
+                isbn: '45674'
+            }
+        ]
+
+        const books = storedBooks;
+
+        // Loop : books and add each to list 
+        books.forEach((book) => UI.addBookToList(book));
+    }
+
+    // Function : to add Book to List
+    static addBookToList(book) {
+        // Get : the container of books
+        let library = document.getElementById('container')
+
+        // Create the div : for each book and make it of class book
+        const item = document.createElement('div');
+        item.classList.add('book');
+
+        // Check : if book-read or book-not-read
+        if (book.pagesRead === book.pagesTotal) {
+            item.classList.add('book-read');
+        } else {
+            item.classList.add('book-not-read');
+        }
+
+        // Create : the inner HTML look of the book div
+        item.innerHTML = `
+            <div class="info">
+                <h2>"${book.title}"</h2>
+                <h3>~ ${book.author}</h3>
+                <p>Pages read: ${book.pagesRead}</p>
+                <p>Total pages: ${book.pagesTotal}</p>
+                <p>ISBN : ${book.isbn}</p>
+            </div>
+            <div class="btns">
+                <p><i class="fas fa-times exit-x"></i></p>
+                <p><i class="fas fa-pen edit-pen"></i></p>
+            </div>
+        `;
+
+        // Append : the item created above in the container
+        library.appendChild(item);
+    }
+}
+
+// Store Class : represents the storing of the books 
+
+// Event : Display Books
+document.addEventListener('DOMContentLoaded', UI.displayBooks);
+
+// Event : Add a Book
+
+// Event : Remove a Book
