@@ -49,7 +49,7 @@ class UI {
     // Function : to display the books that are in the list
     static displayBooks() {
 
-        const storedBooks = Store.getBooks();
+        const storedBooks = []
 
         // to make a global variable
         window.books = storedBooks;
@@ -153,42 +153,6 @@ class UI {
 }
 
 // Store Class : represents the storing of the books 
-class Store {
-
-    // Function : get the books from the local storage
-    static getBooks() {
-        let books;
-        if (localStorage.getItem(('books') === null)) {
-            books = [];
-        } else {
-            books = JSON.parse(localStorage.getItem('books'));
-        }
-
-        return books;
-    }
-
-    // Function : add a book in the local storage
-    static addBook(book) {
-        const books = Store.getBooks();
-        books.push(book);
-        localStorage.setItem('books', JSON.stringify(books));
-    }
-
-    // Function : remove a book from local storage
-    static removeBook(isbn) {
-        const books = Store.getBooks();
-
-        // Loop : search the isbn and remove the book
-        books.forEach((book, index) => {
-            if (book.isbn === isbn) {
-                books.splice(index, 1);
-            }
-        });
-
-        localStorage.setItem('books', JSON.stringify(books));
-    }
-
-}
 
 // Event : Display Books
 document.addEventListener('DOMContentLoaded', UI.displayBooks);
@@ -226,14 +190,11 @@ formSubmit.addEventListener('click', e => {
         // Action : Instantiate book
         const book = new Book(title, author, pagesRead, pagesTotal, isbn);
 
-        // Action : add book to the Store
-        Store.addBook(book);
-
         // Action : add book to the UI
         UI.addBookToList(book);
 
         // Action : show success alert
-        UI.showAlert(`The book "${book.title}" has been added to your Library`, 'success');
+        UI.showAlert(`The book "${book.title} has been added to your Library"`, 'success');
 
         // Action : clear form fields
         UI.clearFormFields();
