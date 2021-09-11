@@ -94,7 +94,7 @@ class UI {
                 <h3>~ ${book.author}</h3>
                 <p>Pages read: ${book.pagesRead}</p>
                 <p>Total pages: ${book.pagesTotal}</p>
-                <p>ISBN : ${book.isbn}</p>
+                <p id="isbn">ISBN : ${book.isbn}</p>
             </div>
             <div class="btns">
                 <p><i class="fas fa-times exit-x"></i></p>
