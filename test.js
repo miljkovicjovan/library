@@ -7,6 +7,8 @@ let localLink = document.getElementById('local')
 let homePage = document.getElementById('full-cont')
 // nav
 let signIn = document.getElementById('signIn')
+// alert 
+let alert = document.getElementById('alert');
 // add button
 let displayForm = document.getElementById('add')
 // form container
@@ -132,6 +134,16 @@ class UI {
         }
     }
 
+    // Function : show alerts (book added/book deleted)
+    static showAlert(message, style) {
+        const div = document.createElement('div');
+        div.className = `alert alert-${style}`;
+        div.appendChild(document.createTextNode(message));
+        alert.appendChild(div);
+
+        setTimeout(() => document.querySelector('.alert').remove(), 3000);
+    }
+
     // Function : delete the book that the x was located in 
     static deleteBook(target) {
         if (target.classList.contains('exit-x')) {
@@ -181,6 +193,9 @@ formSubmit.addEventListener('click', e => {
         // Action : add book to the UI
         UI.addBookToList(book);
 
+        // Action : show success alert
+        UI.showAlert(`The book "${book.title} has been added to your Library"`, 'success');
+
         // Action : clear form fields
         UI.clearFormFields();
     }
@@ -190,4 +205,7 @@ formSubmit.addEventListener('click', e => {
 // Event : Remove a Book
 library.addEventListener('click', e => {
     UI.deleteBook(e.target);
+
+    // Action : show success alert
+    UI.showAlert(`The book has been deleted from your Library`, 'danger');
 });

@@ -6,6 +6,11 @@
                 -13px -13px 26px #808080;
 }
 
+/* alert text */
+#alert p {
+    margin-bottom: 0;
+}
+
 /* the add books button */
 #addBook {
     position: absolute;
