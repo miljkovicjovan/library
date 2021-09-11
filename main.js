@@ -194,7 +194,7 @@ formSubmit.addEventListener('click', e => {
         UI.addBookToList(book);
 
         // Action : show success alert
-        UI.showAlert(`The book "${book.title} has been added to your Library"`, 'success');
+        UI.showAlert(`The book "${book.title}" has been added to your Library`, 'success');
 
         // Action : clear form fields
         UI.clearFormFields();
