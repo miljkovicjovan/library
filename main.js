@@ -49,12 +49,8 @@ class UI {
     // Function : to display the books that are in the list
     static displayBooks() {
 
-        const storedBooks = []
+        window.books = Store.getBooks();
 
-        // to make a global variable
-        window.books = storedBooks;
-
-        // Loop : books and add each to list 
         books.forEach((book) => UI.addBookToList(book));
     }
 
@@ -153,6 +149,42 @@ class UI {
 }
 
 // Store Class : represents the storing of the books 
+class Store {
+
+    // Function : get the books in the library
+    static getBooks() {
+        let books;
+
+        if(localStorage.getItem('books') === null) {
+            books = [];
+        } else {
+            books = JSON.parse(localStorage.getItem('books'));
+        }
+
+        return books;
+    }
+
+    // Function : add a book in the local storage
+    static addBook(book) {
+        const books = Store.getBooks();
+        books.push(book);
+        localStorage.setItem('books', JSON.stringify(books));
+    }
+
+    // Function : remove a book from local storage
+    static removeBook(isbn) {
+        const books = Store.getBooks();
+
+        // Loop : search the isbn and remove the book
+        books.forEach((book, index) => {
+            if (book.isbn == isbn) {
+                books.splice(index, 1);
+            }
+        });
+
+        localStorage.setItem('books', JSON.stringify(books));
+    }
+}
 
 // Event : Display Books
 document.addEventListener('DOMContentLoaded', UI.displayBooks);
@@ -193,8 +225,11 @@ formSubmit.addEventListener('click', e => {
         // Action : add book to the UI
         UI.addBookToList(book);
 
+        // Action : add book to the Store
+        Store.addBook(book);
+
         // Action : show success alert
-        UI.showAlert(`The book "${book.title} has been added to your Library"`, 'success');
+        UI.showAlert(`The book "${book.title}" has been added to your Library`, 'success');
 
         // Action : clear form fields
         UI.clearFormFields();
@@ -204,7 +239,12 @@ formSubmit.addEventListener('click', e => {
 
 // Event : Remove a Book
 library.addEventListener('click', e => {
+
+    // Action : delete the books UI element
     UI.deleteBook(e.target);
+
+    // Action : traverse the DOM to get the value of the specific isbn
+    Store.removeBook(e.target.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.innerHTML.substring(7,));
 
     // Action : show success alert
     UI.showAlert(`The book has been deleted from your Library`, 'danger');
