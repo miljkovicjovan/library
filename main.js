@@ -1,184 +1,211 @@
-// When clicking local 
+//------------------ UI elements ------------------
+// hello page
+let helloPage = document.getElementById('hello-cont')
+let cloudLink = document.getElementById('cloud')
 let localLink = document.getElementById('local')
-localLink.addEventListener('click', e => {
-    // turn hello page display none
-    document.getElementById('hello-cont').style.display = 'none'
-    // turn local page display on
-    document.getElementById('full-cont').style.display = 'block'
-})
+//---- home page ----
+let homePage = document.getElementById('full-cont')
+// nav
+let signIn = document.getElementById('signIn')
+// alert 
+let alert = document.getElementById('alert');
+// add button
+let displayForm = document.getElementById('add')
+// form container
+let formContainer = document.getElementById('form-container')
+let closeForm = document.getElementById('close')
+let formTitle = document.getElementById('title')
+let formAuthor = document.getElementById('author')
+let formReadPages = document.getElementById('readPages')
+let formTotalPages = document.getElementById('totalPages')
+let formSubmit = document.getElementById('addBook')
+let formError = document.getElementById('errorSpan')
+// info cont
+let booksAdded = document.getElementById('booksAdded')
+let booksRead = document.getElementById('booksRead')
+let pagesRead = document.getElementById('pagesRead')
+// books cont
+let library = document.getElementById('container')
+// book buttons
+let deleteBook = document.querySelector('.exit-x')
+let editBook = document.querySelector('.edit-pem')
 
-// object of book 
-function Book(title, author, pagesTotal, pagesRead) {
-    this.title = title
-    this.author = author
-    this.pagesTotal = pagesTotal
-    this.pagesRead = pagesRead
-    this.info = function() {
-        if (read) {
-            read = "read"
-        } else {
-            read = "not read yet"
-        }
-
-        if (pagesRead === pagesTotal) {
-            pages = "fully read"
-        } else {
-            pages = pagesRead + " pages read from " + pagesTotal + " total" 
-        }
-
-        return title + ", " + author + ", " + pages
+// Book class : represents each book added (title/author/pages read/total pages)
+class Book {
+    constructor(title, author, pagesRead, pagesTotal, isbn) {
+        this.title = title;
+        this.author = author;
+        this.pagesRead = pagesRead;
+        this.pagesTotal = pagesTotal;
+        this.isbn = isbn;
     }
 }
 
-// array of books 
-let myLibrary = []
 
-// variables of HTML elements
-let book = document.getElementById('book')
-let container = document.getElementById('container')
 
-// function to display the books HTML
-function displayBooks(myLibrary) {
-    for (let i = 0; i < myLibrary.length; i++) {
-        // get the info of every book
-        const title = document.createElement('h2')
-        title.innerHTML = myLibrary[i].title
+// UI Class : represents User Interface and all actions connected 
+class UI {
 
-        const author = document.createElement('h3')
-        author.innerHTML = myLibrary[i].author
+    // Function : to display the books that are in the list
+    static displayBooks() {
 
-        const pages = document.createElement('p')
-        pages.innerHTML = myLibrary[i].pages
+        const storedBooks = []
 
-        const read = document.createElement('h5')
-        read.innerHTML = (myLibrary[i].read)?"Read":"Not Read"
+        // to make a global variable
+        window.books = storedBooks;
 
-        // create div and add book class style
-        const item = document.createElement('div')
-        item.classList.add('book')
-
-        // add the info of the books in the item
-        item.appendChild(title)
-        item.appendChild(author)
-        item.appendChild(pages)
-        item.appendChild(read)
-
-        // append the item in the container
-        container.insertBefore(item, container.firstChild)
+        // Loop : books and add each to list 
+        books.forEach((book) => UI.addBookToList(book));
     }
-} 
 
-// function to add a new book in the myLibrary array
-let addBook = document.getElementById('addBook')
-let error = document.getElementById('errorSpan')
 
-// all form values
-let newTitle = document.getElementById('title')
-let newAuthor = document.getElementById('author')
-let totalPages = document.getElementById('totalPages')
-let readPages = document.getElementById('readPages')
+    // Function : create an ISBN that is not on the list
+    static getISBN() {
+        let isbn;
+        while (true) {
+            isbn = Math.floor(Math.random() * 99999);
 
-// function to open the pop up form for new book
-let add = document.getElementById('add')
-add.addEventListener('click', e => {
-    window.scrollTo(0, 0);
-    document.documentElement.style.overflow = "hidden"
-    document.getElementById('form-container').style.display = "flex";
-})
-// function to close the pop up window and delete the text written
-let close = document.getElementById('close')
-close.addEventListener('click', e => {
-    document.documentElement.style.overflow = "visible"
-    newTitle.value = "";
-    newAuthor.value = "";
-    totalPages.value = ''
-    readPages.value = ''
-    error.innerHTML = ""
-    document.getElementById('form-container').style.display = "none";
-})
+            books.forEach((book) => {
+                if (isbn === book.isbn) {
+                    UI.getISBN;
+                }
+            });
+            break;
+        }
+        return isbn;
+    }
 
-addBook.addEventListener('click', e => {
-    // only if form is complete 
-    if (newTitle.value && newAuthor.value && totalPages.value && readPages.value && totalPages.valueAsNumber >= readPages.valueAsNumber) {
-        error.innerHTML = ''
+    // Function : to add Book to List
+    static addBookToList(book) {
 
-        const title = document.createElement('h2')
-        title.innerHTML = '"' + newTitle.value + '"'
+        // Create the div : for each book and make it of class book
+        const item = document.createElement('div');
+        item.classList.add('book');
 
-        const author = document.createElement('h3')
-        author.innerHTML = "~ " + newAuthor.value
-
-        const pagesRead = document.createElement('p')
-        pagesRead.innerHTML = "Pages read: " + readPages.valueAsNumber
-
-        const pagesTotal = document.createElement('p')
-        pagesTotal.innerHTML = "Total pages: " + totalPages.valueAsNumber
-
-        // create div and add info class style
-        const info = document.createElement('div')
-        info.classList.add('info')
-
-        // add the values in the info div
-        info.appendChild(title)
-        info.appendChild(author)
-        info.appendChild(pagesRead)
-        info.appendChild(pagesTotal)
-
-        // create the x button
-        const iconX = document.createElement('i')
-        iconX.classList.add('fas')
-        iconX.classList.add('fa-times')
-        iconX.classList.add('exit-x')
-
-        // create the edit button
-        const editPen = document.createElement('i')
-        editPen.classList.add('fas')
-        editPen.classList.add('fa-pen')
-        editPen.classList.add('edit-pen')
-
-        // create the p tag to have the i tag in 
-        const pTagX = document.createElement('p')
-        const pTagPen = document.createElement('p')     
-
-        // put the iconX in the pTag
-        pTagX.appendChild(iconX)
-        pTagPen.appendChild(editPen)
-        
-
-        // create the btns div to add the pTag
-        const btns = document.createElement('div')
-        btns.classList.add('btns')
-        btns.appendChild(pTagX)
-        btns.appendChild(pTagPen)
-
-        // create div and add book class style
-        const item = document.createElement('div')
-        item.classList.add('book')
-        if (totalPages.valueAsNumber > readPages.valueAsNumber) {
-            item.classList.add('book-not-read')
+        // Check : if book-read or book-not-read
+        if (book.pagesRead === book.pagesTotal) {
+            item.classList.add('book-read');
         } else {
-            item.classList.add('book-read')
+            item.classList.add('book-not-read');
         }
 
-        // add the info and btns cont
-        item.appendChild(info)
-        item.appendChild(btns)
+        // Create : the inner HTML look of the book div
+        item.innerHTML = `
+            <div class="info">
+                <h2>"${book.title}"</h2>
+                <h3>~ ${book.author}</h3>
+                <p>Pages read: ${book.pagesRead}</p>
+                <p>Total pages: ${book.pagesTotal}</p>
+                <p id="isbn">ISBN : ${book.isbn}</p>
+            </div>
+            <div class="btns">
+                <p><i class="fas fa-times exit-x"></i></p>
+                <p><i class="fas fa-pen edit-pen"></i></p>
+            </div>
+        `;
 
-        // append the item in the container
-        container.insertBefore(item, container.firstChild)
-
-        // remove values and close form
-        newTitle.value = "";
-        newAuthor.value = "";
-        totalPages.value = ''
-        readPages.value = ''
-        document.getElementById('form-container').style.display = "none";
-
-
-        document.documentElement.style.overflow = "visible"
-        displayBooks(myLibrary)
-    } // error handling
-    else {
-        error.innerHTML = "You forgot to input something"
+        // Append : the item created above in the container
+        library.appendChild(item);
     }
+
+    // Function : clear form fields (for when exiting and submiting)
+    static clearFormFields() {
+        document.documentElement.style.overflow = "visible"; // allow scrollability again
+        formTitle.value = "";
+        formAuthor.value = "";
+        formReadPages.value = "";
+        formTotalPages.value = "";
+        formError.innerHTML = "";
+        formContainer.style.display = "none";
+    }
+
+    // Function : check form values and display errors
+    static checkFormValues() {
+        if (formTitle.value && formAuthor.value && formReadPages.value && formTotalPages.value) {
+            if (formReadPages.valueAsNumber <= formTotalPages.valueAsNumber) {
+                return true
+            } else {
+                formError.innerHTML = "You made a mistake when inputting page details"
+                return false
+            }
+        } else {
+            formError.innerHTML = "You forgot to input book details"
+            return false
+        }
+    }
+
+    // Function : show alerts (book added/book deleted)
+    static showAlert(message, style) {
+        const div = document.createElement('div');
+        div.className = `alert alert-${style}`;
+        div.appendChild(document.createTextNode(message));
+        alert.appendChild(div);
+
+        setTimeout(() => document.querySelector('.alert').remove(), 3000);
+    }
+
+    // Function : delete the book that the x was located in 
+    static deleteBook(target) {
+        if (target.classList.contains('exit-x')) {
+            target.parentElement.parentElement.parentElement.remove();
+        }
+    }
+}
+
+// Store Class : represents the storing of the books 
+
+// Event : Display Books
+document.addEventListener('DOMContentLoaded', UI.displayBooks);
+
+// Event : Choosing local storage on the welcome page
+localLink.addEventListener('click', e => {
+    helloPage.style.display = 'none';
+    homePage.style.display = 'block';
 })
+
+// Event : display form for new book to be added
+displayForm.addEventListener('click', e => {
+    window.scrollTo(0, 0); // scroll to top
+    document.documentElement.style.overflow = "hidden"; // remove scrollability
+    formContainer.style.display = "flex";
+})
+
+// Event : close down form and delete all values left
+closeForm.addEventListener('click', e => {
+    UI.clearFormFields();
+})
+
+// Event : Add a Book
+formSubmit.addEventListener('click', e => {
+
+    // Action : Get form values
+    const title = formTitle.value;
+    const author = formAuthor.value;
+    const pagesRead = formReadPages.value;
+    const pagesTotal = formTotalPages.value;
+    const isbn = UI.getISBN();
+
+    // Action : check form values
+    if (UI.checkFormValues()) {
+        // Action : Instantiate book
+        const book = new Book(title, author, pagesRead, pagesTotal, isbn);
+
+        // Action : add book to the UI
+        UI.addBookToList(book);
+
+        // Action : show success alert
+        UI.showAlert(`The book "${book.title} has been added to your Library"`, 'success');
+
+        // Action : clear form fields
+        UI.clearFormFields();
+    }
+    
+});
+
+// Event : Remove a Book
+library.addEventListener('click', e => {
+    UI.deleteBook(e.target);
+
+    // Action : show success alert
+    UI.showAlert(`The book has been deleted from your Library`, 'danger');
+});
