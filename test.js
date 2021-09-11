@@ -131,6 +131,13 @@ class UI {
             return false
         }
     }
+
+    // Function : delete the book that the x was located in 
+    static deleteBook(target) {
+        if (target.classList.contains('exit-x')) {
+            target.parentElement.parentElement.parentElement.remove();
+        }
+    }
 }
 
 // Store Class : represents the storing of the books 
@@ -181,4 +188,6 @@ formSubmit.addEventListener('click', e => {
 });
 
 // Event : Remove a Book
-
+library.addEventListener('click', e => {
+    UI.deleteBook(e.target);
+});
