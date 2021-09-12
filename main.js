@@ -20,10 +20,6 @@ let formReadPages = document.getElementById('readPages')
 let formTotalPages = document.getElementById('totalPages')
 let formSubmit = document.getElementById('addBook')
 let formError = document.getElementById('errorSpan')
-// info cont
-let booksAdded = document.getElementById('booksAdded')
-let booksRead = document.getElementById('booksRead')
-let pagesRead = document.getElementById('pagesRead')
 // books cont
 let library = document.getElementById('container')
 // book buttons
@@ -48,12 +44,9 @@ class UI {
 
     // Function : to display the books that are in the list
     static displayBooks() {
-
         window.books = Store.getBooks();
-
         books.forEach((book) => UI.addBookToList(book));
     }
-
 
     // Function : create an ISBN that is not on the list
     static getISBN() {
@@ -188,6 +181,7 @@ class Store {
 
 // Event : Display Books
 document.addEventListener('DOMContentLoaded', UI.displayBooks);
+
 
 // Event : Choosing local storage on the welcome page
 localLink.addEventListener('click', e => {
