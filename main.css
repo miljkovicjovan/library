@@ -6,6 +6,11 @@
                 -13px -13px 26px #808080;
 }
 
+/* disabled-button */
+.disabled-button {
+    cursor: not-allowed;
+}
+
 /* alert text */
 #alert p {
     margin-bottom: 0;
