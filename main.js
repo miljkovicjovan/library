@@ -234,12 +234,15 @@ formSubmit.addEventListener('click', e => {
 // Event : Remove a Book
 library.addEventListener('click', e => {
 
-    // Action : delete the books UI element
-    UI.deleteBook(e.target);
+    if (e.target.classList.contains('exit-x')) {
+        // Action : delete the books UI element
+        UI.deleteBook(e.target);
 
-    // Action : traverse the DOM to get the value of the specific isbn
-    Store.removeBook(e.target.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.innerHTML.substring(7,));
+        // Action : traverse the DOM to get the value of the specific isbn
+        Store.removeBook(e.target.parentElement.parentElement.parentElement.firstElementChild.lastElementChild.innerHTML.substring(7,));
 
-    // Action : show success alert
-    UI.showAlert(`The book has been deleted from your Library`, 'danger');
+        // Action : show success alert
+        UI.showAlert(`The book has been deleted from your Library`, 'danger');
+    }
+
 });
