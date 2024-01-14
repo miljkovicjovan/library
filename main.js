@@ -65,37 +65,44 @@ class UI {
     }
 
     // Function : to add Book to List
-    static addBookToList(book) {
+static addBookToList(book) {
 
-        // Create the div : for each book and make it of class book
-        const item = document.createElement('div');
-        item.classList.add('book');
+    // Create the div : for each book and make it of class book
+    const item = document.createElement('div');
+    item.classList.add('book');
 
-        // Check : if book-read or book-not-read
-        if (book.pagesRead === book.pagesTotal) {
-            item.classList.add('book-read');
-        } else {
-            item.classList.add('book-not-read');
-        }
-
-        // Create : the inner HTML look of the book div
-        item.innerHTML = `
-            <div class="info">
-                <h2>"${book.title}"</h2>
-                <h3>~ ${book.author}</h3>
-                <p>Pages read: ${book.pagesRead}</p>
-                <p>Total pages: ${book.pagesTotal}</p>
-                <p id="isbn">ISBN : ${book.isbn}</p>
-            </div>
-            <div class="btns">
-                <p><i class="fas fa-times exit-x"></i></p>
-                <p><i class="fas fa-pen edit-pen"></i></p>
-            </div>
-        `;
-
-        // Append : the item created above in the container
-        library.appendChild(item);
+    // Check : if book-read or book-not-read
+    if (book.pagesRead === book.pagesTotal) {
+        item.classList.add('book-read');
+    } else {
+        item.classList.add('book-not-read');
     }
+
+    // Calculate the percentage of pages read
+    const percentageRead = (book.pagesRead / book.pagesTotal) * 100;
+
+    // Create : the inner HTML look of the book div with a progress bar
+    item.innerHTML = `
+        <div class="info">
+            <h2>"${book.title}"</h2>
+            <h3>~ ${book.author}</h3>
+            <p>Pages read: ${book.pagesRead}</p>
+            <p>Total pages: ${book.pagesTotal}</p>
+            <p id="isbn">ISBN : ${book.isbn}</p>
+        </div>
+        <div class="progress-bar-container">
+            <div class="progress-bar" style="width: ${percentageRead}%;"></div>
+        </div>
+        <div class="btns">
+            <p><i class="fas fa-times exit-x"></i></p>
+            <p><i class="fas fa-pen edit-pen"></i></p>
+        </div>
+    `;
+
+    // Append : the item created above in the container
+    library.appendChild(item);
+}
+
 
     // Function : clear form fields (for when exiting and submiting)
     static clearFormFields() {
